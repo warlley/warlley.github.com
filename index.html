@@ -1,217 +1,62 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<title>Warlley : My Github Blog</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+---
+layout: post-index
+title: Latest Posts
+description: "Describe this nonsense."
+tags: [Jekyll, theme, themes, responsive, blog, modern]
+image:
+  feature: abstract-1.jpg
+  credit: dargadgetz
+  creditlink: http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/
+---
 
-<link href="./app/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+{% for post in paginator.posts %}
+<article class="hentry" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished"><a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a></time></span><span class="author vcard" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="fn"><a href="{{ site.url }}/about" title="About {{ site.owner.name }}" itemprop="url">{{ site.owner.name }}</a></span></span>{% if site.disqus_shortname and post.comments %}&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="{{ site.url }}{{ post.url }}#disqus_thread">Comment</a></span>{% endif %}</div><!-- /.entry-meta -->
+    {% if post.link %}
+      <h1 class="entry-title" itemprop="name"><a href="{{ site.url }}{{ post.url }}" rel="bookmark" itemprop="url" title="{{ post.title }}"><i class="icon-double-angle-right"></i></a> <a href="{{ post.link }}">{{ post.title }}</a></h1>
+    {% else %}
+      <h1 class="entry-title" itemprop="name"><a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }}</a></h1>
+    {% endif %}
+  </header>
+  <div class="entry-content" itemprop="description">
+    {{ post.content }}
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+{% endfor %}
 
-<script type="text/javascript" src="./app/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="./app/async.js"></script>
-<script type="text/javascript" src="./app/json2.js"></script>
-<script type="text/javascript" src="./app/underscore-min.js"></script>
-<script type="text/javascript" src="./app/backbone-min.js"></script>
-<script type="text/javascript" src="./app/base64.js"></script>
-<script type="text/javascript" src="./app/showdown.js"></script>
+<div class="pagination">
+  {% if paginator.previous_page %}
+    {% if paginator.previous_page == 1 %}
+      <a href="{{ site.url }}" class="btn">Previous</a>
+    {% else %}
+      <a href="{{ site.url }}/page{{ paginator.previous_page }}" class="btn">Previous</a>
+    {% endif %}
+  {% else %}
+    Previous
+  {% endif %}
+  <ul class="inline-list">
+    <li>
+      {% if paginator.page == 1 %}
+        <span class="current-page">1</span>
+      {% else %}
+        <a href="{{ site.url }}">1</a>
+      {% endif %}
+    </li>
+    {% for count in (2..paginator.total_pages) %}
+      <li>
+        {% if count == paginator.page %}
+          <span class="current-page">{{ count }}</span>
+        {% else %}
+          <a href="{{ site.url }}/page{{ count }}">{{ count }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  {% if paginator.next_page %}
+    <a href="{{ site.url }}/page{{ paginator.next_page }}" class="btn">Next</a>
+  {% else %}
+    Next
+  {% endif %}
 
-<script src="http://scripts.embed.ly/jquery.embedly.min.js"></script>
-
-<script type="text/javascript">
-var hubticle = {}
-hubticle.settings = {};
-hubticle.settings.apiUrl = 'https://api.github.com';
-hubticle.settings.pageCapacity = 5;
-
-hubticle.settings.user = 'warlley';            // setting user name
-hubticle.settings.repo = 'warlley.github.com'; // setting repo name
-
-hubticle.settings.embedlyApiKey = '1a76167c734511e193c14040d3dc5c07';
-</script>
-</head>
-
-<body>
-  <div class="container">
-    <div id="header">
-      <h1><a href="/">Warlley</a></h1>
-      <p class="lead">My Github Blog</p>
-    </div>
-    <div id="posts">
-    </div>
-    <div id="steps">
-      <div id="steps_prev"></div>
-      <div id="steps_next"></div>
-    </div>
-    <div id="footer">
-  </div>
 </div>
-
-<style>
-.container {
-  margin: 0 auto;
-  width: 500px;
-}
-#header {
-  margin: 10px 0px 50px 0px;
-}
-#header > h1 {
-  margin: 10px 0px 20px 0px;
-
-  font-size: 54px;
-}
-.post {
-  margin: 10px 0px 20px 0px;
-
-  border-bottom: 1px solid #EEEEEE;
-}
-.post > .content > h1 {
-  margin: 10px 0px 10px 0px;
-}
-#steps_next {
-  font-family: Monaco, Courier, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
-}
-#steps_prev {
-  font-family: Monaco, Courier, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
-}
-body {
-  font-family: Monaco, Courier, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
-}
-p {
-  font-family: Monaco, Courier, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
-}
-</style>
-
-<script type="text/javascript">
-var markdown = new Showdown.converter();
-
-hubticle.postView = function(path, content) {
-  var view = '<div class="post"><div class="content">#{content}</div><div class="path"><a href="/#/posts/#{path}">#{path}</a></div></div>';
-  view = view.replace('#{path}', path);
-  view = view.replace('#{path}', path);
-  view = view.replace('#{content}', markdown.makeHtml(content));
-  return view;
-}
-
-hubticle.setItem = function(path, url, callback) {
-  var apiCall = {
-    url: hubticle.settings.apiUrl, dataType: 'jsonp', data: null, success: null, error: function() {alert('error');}
-  }
-
-  apiCall.url = url;
-  apiCall.success = function(data) {
-    var content = data.data.content;
-    content = data.data.content.replace(/\r\n/g, '').replace(/\n/g, '');
-    $('#posts').append(hubticle.postView(path, Base64.decode(content)));
-    callback();
-  };
-  $.ajax(apiCall);
-}
-
-hubticle.setList = function(articleId, pageNum) {
-  $('#posts').empty();
-
-  var apiCall = {
-    url: hubticle.settings.apiUrl, dataType: 'jsonp', data: null, success: null, error: function() {alert('error');}
-  }
-
-  apiCall.url = apiCall.url + '/repos/' + hubticle.settings.user + '/' + hubticle.settings.repo + '/git/trees/master';
-  apiCall.success = function(data) {
-    var fileList = [];
-
-    for (var i = 0; i < data.data.tree.length; i++) {
-      if (data.data.tree[i]['path'].match(/^.*\.markdown$/)) {
-        fileList.push(data.data.tree[i]);
-      }
-    }
-
-    fileList = fileList.sort(function(a, b) {return a['path'] < b['path'] ? 1 : -1;});
-
-    var q = async.queue(
-      function(task, callback) {
-        hubticle.setItem(task.path, task.url, callback);
-      },
-      1
-    );
-
-    var sIndex = 0;
-    if (pageNum != null) {
-      sIndex = pageNum * hubticle.settings.pageCapacity;
-    }
-
-    var eIndex = fileList.length;
-    if (pageNum != null) {
-      eIndex = pageNum * hubticle.settings.pageCapacity + hubticle.settings.pageCapacity;
-    }
-
-    for (var i = sIndex; i < fileList.length && i < eIndex; i++) {
-      if ((articleId != null && articleId == fileList[i]['path']) || (articleId == null)) {
-        q.push(fileList[i]);
-      }
-    }
-
-    q.drain = function() {
-      $('a').embedly({key: hubticle.settings.embedlyApiKey});
-    }
-
-    if (pageNum != null) {
-      if (sIndex != 0) {
-        $('#steps_prev').empty();
-        $('#steps_prev').append('<a href="#/page/' + (parseInt(pageNum) - 1) + '">prev</a>');
-      }
-      else {
-        $('#steps_prev').empty();
-        $('#steps_prev').append('<span>prev</span>');
-      }
-    } else {
-      $('#steps_prev').empty();
-    }
-
-    if (pageNum != null) {
-      if (eIndex < fileList.length) {
-        $('#steps_next').empty();
-        $('#steps_next').append('<a href="#/page/' + (parseInt(pageNum) + 1) + '">next</a>');
-      }
-      else {
-        $('#steps_next').empty();
-        $('#steps_next').append('<span>next</span>');
-      }
-    } else {
-      $('#steps_next').empty();
-    }
-  };
-  $.ajax(apiCall);
-}
-
-hubticle.AppRouter = Backbone.Router.extend({
-  routes: {
-    '': 'index',
-    '/posts/:id': 'archivesByItem',
-    '/page/:pageNum': 'archivesByPage'
-  },
-
-  index: function() {
-    var id = null;
-    var pageNum = 0;
-    hubticle.setList(id, pageNum);
-  },
-
-  archivesByItem: function(id) {
-    var id = id;
-    var pageNum = null;
-    hubticle.setList(id, pageNum);
-  },
-
-  archivesByPage: function(pageNum) {
-    var id = null;
-    var pageNum = pageNum;
-    hubticle.setList(id, pageNum);
-  }
-});
-
-$(function() {
-  new hubticle.AppRouter();
-  Backbone.history.start();
-});
-</script>
-</body>
-</html>
