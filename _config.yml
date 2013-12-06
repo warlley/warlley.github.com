@@ -1,6 +1,6 @@
 title:            Warlley Rezende
 description:      Describe your website here.
-disqus_shortname:
+disqus_shortname: warlley
 #Your site's domain goes here. Leave localhost server or blank when working locally.
 url:              http://warlley.github.io
 
@@ -11,9 +11,9 @@ owner:
   bio:            "Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice."
   email:          "warlley@ibody.com.br"
   # Social networking links used in footer. Update and remove as you like.
-  twitter:
+  twitter:        "warlley"
   facebook:
-  github:
+  github:         "warlley"
   stackexchange:
   linkedin:
   instagram:
@@ -41,7 +41,7 @@ links:
     external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/New_York
+timezone:    America/Sao_Paulo
 future:      true
 pygments:    true
 markdown:    kramdown
@@ -68,3 +68,5 @@ kramdown:
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
+
+default_locale: "pt-BR"

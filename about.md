@@ -1,8 +1,8 @@
 ---
 layout: page
 permalink: /about/
-title: About the Theme
-tags: [Jekyll, theme, modern, minimal, responsive]
+title: About me
+tags: [about, sobre, curriculo]
 image:
   feature: abstract-5.jpg
   credit: dargadgetz
@@ -15,7 +15,7 @@ They say three times the charm, so here is another free responsive Jekyll theme 
 ## What HPSTR brings to the table:
 
 * Responsive templates for post, page, and post index `_layouts`. Looks great on mobile, tablet, and desktop devices.
-* Gracefully degrads in older browsers. Compatible with Internet Explorer 8+ and all modern browsers.  
+* Gracefully degrads in older browsers. Compatible with Internet Explorer 8+ and all modern browsers.
 * Modern and minimal design.
 * Sweet animated menu.
 * Background image support.
