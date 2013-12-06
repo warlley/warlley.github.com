@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://localhost:4000</loc>
+        <loc>http://warlley.github.io</loc>
     </url>
     
     
     <url>
-        <loc>http://localhost:4000/background-image</loc>
+        <loc>http://warlley.github.io/background-image</loc>
     </url>
     
     <url>
-        <loc>http://localhost:4000/code-highlighting-post</loc>
+        <loc>http://warlley.github.io/code-highlighting-post</loc>
     </url>
     
     <url>
-        <loc>http://localhost:4000/sample-link-post</loc>
+        <loc>http://warlley.github.io/sample-link-post</loc>
     </url>
     
     <url>
-        <loc>http://localhost:4000/video-post</loc>
+        <loc>http://warlley.github.io/video-post</loc>
     </url>
     
     <url>
-        <loc>http://localhost:4000/readability-feature-post</loc>
+        <loc>http://warlley.github.io/readability-feature-post</loc>
     </url>
     
     <url>
-        <loc>http://localhost:4000/sample-post-images</loc>
+        <loc>http://warlley.github.io/sample-post-images</loc>
     </url>
     
     <url>
-        <loc>http://localhost:4000/readability-post</loc>
+        <loc>http://warlley.github.io/readability-post</loc>
     </url>
     
     <url>
-        <loc>http://localhost:4000/sample-post</loc>
+        <loc>http://warlley.github.io/sample-post</loc>
     </url>
     
 </urlset>
