@@ -8,7 +8,7 @@ url:              http://warlley.github.io
 owner:
   name:           Warlley Rezende
   avatar:         avatar.jpg
-  bio:            "Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice."
+  bio:            '"Rei dos Programadores", Cofundador da iBody Interativa e da ÁgilSocial'
   email:          "warlley@ibody.com.br"
   # Social networking links used in footer. Update and remove as you like.
   twitter:        "warlley"
@@ -16,7 +16,7 @@ owner:
   github:         "warlley"
   stackexchange:
   linkedin:
-  instagram:
+  instagram:      "warlleyrezende"
   flickr:
   tumblr:
   # For Google Authorship https://plus.google.com/authorship
@@ -34,10 +34,11 @@ bing_verify:
 # Links to include in top navigation
 # For external links add external: true
 links:
-  - title: Theme Setup
-    url: /theme-setup
-  - title: External Link
-    url: http://mademistakes.com
+  - title: iBody Interativa
+    url: http://ibody.com.br
+    external: true
+  - title: ÁgilSocial
+    url: http://agilsocial.com
     external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
